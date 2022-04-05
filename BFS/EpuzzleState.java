@@ -30,11 +30,11 @@ public class EpuzzleState extends SearchState {
   public boolean goalPredicate(Search searcher) {
       EpuzzleSearch epuzzleSearch = (EpuzzleSearch) searcher;
       int [][] target = epuzzleSearch.getTarget();
-      return puzzle == target;
+      return Objects.deepEquals(target, puzzle);
 }
 
 
-
+ArrayList<EpuzzleState> epuzzleStatesList = new ArrayList<EpuzzleState>();
 
     private EpuzzleState MoveUp(){
         for(int i = 0; i < puzzle.length; i++){
@@ -43,6 +43,8 @@ public class EpuzzleState extends SearchState {
                     int temp =  puzzle[i][j];
                     puzzle[i][j] = puzzle[i-1][j];
                     puzzle[i-1][j] = temp;
+                    EpuzzleState epuzzleState = new EpuzzleState(puzzle);
+                    epuzzleStatesList.add(epuzzleState);
                 }
             }            
         }
@@ -57,6 +59,8 @@ public class EpuzzleState extends SearchState {
                     int temp =  puzzle[i][j];
                     puzzle[i][j] = puzzle[i+1][j];
                     puzzle[i+1][j] = temp;
+                    EpuzzleState epuzzleState = new EpuzzleState(puzzle);
+                    epuzzleStatesList.add(epuzzleState);
                 }
             }
             
@@ -64,7 +68,7 @@ public class EpuzzleState extends SearchState {
         return null;
 
     }
-
+    
     private EpuzzleState MoveRight(){
         for(int i = 0; i < puzzle.length; i++){
             for(int j = 0; j < puzzle.length; j++){
@@ -72,6 +76,9 @@ public class EpuzzleState extends SearchState {
                     int temp =  puzzle[i][j];
                     puzzle[i][j] = puzzle[i][j+1];
                     puzzle[i][j+1] = temp;
+                    EpuzzleState epuzzleState = new EpuzzleState(puzzle);
+                    epuzzleStatesList.add(epuzzleState);
+                    
                 }
             }
             
@@ -86,6 +93,8 @@ public class EpuzzleState extends SearchState {
                     int temp =  puzzle[i][j];
                     puzzle[i][j] = puzzle[i][j-1];
                     puzzle[i][j-1] = temp;
+                    EpuzzleState epuzzleState = new EpuzzleState(puzzle);
+                    epuzzleStatesList.add(epuzzleState);
                 }
             }
             
@@ -110,7 +119,7 @@ public class EpuzzleState extends SearchState {
     ArrayList<SearchState> searchStatesList = new ArrayList<SearchState>();
 
     for (int i = 0; i < puzzle.length; i++) {
-        for(int j = 0; j < puzzle.length; j++){
+        for(int j = 0; j < puzzle[i].length; j++){
             if(puzzle[i][j] == 0){
                 MoveUp();
                 MoveDown();
@@ -148,20 +157,31 @@ public class EpuzzleState extends SearchState {
    * toString
    */
 
-public String toString(){
-    String s = "";
+  public String toString() {
+    String str = "\n";
+    // str = "\n";
     for (int i = 0; i < puzzle.length; i++) {
-        for(int j = 0; j < puzzle.length; j++){
-        s += puzzle[i][j];
+        for (int j = 0; j < puzzle.length; j++) {
+            str += puzzle[i][j] + " ";
         }
+        str += "\n";
+     }
+    return str;
     }
-    return s;
-}
 
-// public void print(){
-//     System.out.println(this.toString());
-// }
+
+
+
+
 
 
     
+
 }
+
+
+
+
+
+    
+

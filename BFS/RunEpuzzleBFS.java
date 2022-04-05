@@ -19,9 +19,9 @@ public class RunEpuzzleBFS {
         };
         SearchState initState = (SearchState) new EpuzzleState(initPuzzle);
 
-        String strategy = new String();
+
         // Set off the search engine
-        String res = searcher.runSearch(initState, strategy);
+        String res = searcher.runSearch(initState, "breadthFirst");
 
         // Print out the results
         System.out.println(res);
