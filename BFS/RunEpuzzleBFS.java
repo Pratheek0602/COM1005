@@ -1,3 +1,4 @@
+import java.util.*;
 public class RunEpuzzleBFS {
 
     public static void main(String[] arg) {
@@ -12,14 +13,15 @@ public class RunEpuzzleBFS {
 
         // Define the start initial state 
         int [][] initPuzzle = {
-            {1,2,3},
-            {4,5,6},
-            {7,8,0}
+            {1,0,3},
+            {4,2,6},
+            {7,5,8}
         };
         SearchState initState = (SearchState) new EpuzzleState(initPuzzle);
 
+        String strategy = new String();
         // Set off the search engine
-        String res = searcher.runSearch(initState);
+        String res = searcher.runSearch(initState, strategy);
 
         // Print out the results
         System.out.println(res);

@@ -93,8 +93,6 @@ public class EpuzzleState extends SearchState {
         return null;
     }
 
-
-  
   /**
    * getSuccessors
    * 
@@ -105,7 +103,8 @@ public class EpuzzleState extends SearchState {
 
 
   public ArrayList<SearchState> getSuccessors(Search searcher) {
-    EpuzzleSearch epuzzleSearch = (EpuzzleSearch) searcher;
+    // EpuzzleSearch epuzzleSearch = (EpuzzleSearch) searcher;
+    // int target = epuzzleSearch.getTarget();
 
     ArrayList<EpuzzleState> epuzzleStatesList = new ArrayList<EpuzzleState>(); // the list of jugs states
     ArrayList<SearchState> searchStatesList = new ArrayList<SearchState>();

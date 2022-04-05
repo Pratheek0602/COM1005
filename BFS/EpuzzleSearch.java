@@ -7,8 +7,7 @@ public class EpuzzleSearch extends Search{
     public EpuzzleSearch(int[][] tar){
         target = tar;
     }
-    public EpuzzleSearch(int[] tarPuzzle) {
-    }
+
     /**
      * accessor for target
      */
