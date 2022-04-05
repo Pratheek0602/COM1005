@@ -39,7 +39,7 @@ public class EpuzzleState extends SearchState {
     private EpuzzleState MoveUp(){
         for(int i = 0; i < puzzle.length; i++){
             for(int j = 0; j < puzzle.length; j++){
-                if(i > 0){
+                if(i > 0 && puzzle[i][j] == 0){
                     int temp =  puzzle[i][j];
                     puzzle[i][j] = puzzle[i-1][j];
                     puzzle[i-1][j] = temp;
@@ -53,7 +53,7 @@ public class EpuzzleState extends SearchState {
     private EpuzzleState MoveDown(){
         for(int i = 0; i < puzzle.length; i++){
             for(int j = 0; j < puzzle.length; j++){
-                if(i < 2){
+                if(i < 2 && puzzle[i][j] == 0){
                     int temp =  puzzle[i][j];
                     puzzle[i][j] = puzzle[i+1][j];
                     puzzle[i+1][j] = temp;
@@ -68,7 +68,7 @@ public class EpuzzleState extends SearchState {
     private EpuzzleState MoveRight(){
         for(int i = 0; i < puzzle.length; i++){
             for(int j = 0; j < puzzle.length; j++){
-                if(j < 2){
+                if(j < 2 && puzzle[i][j] == 0){
                     int temp =  puzzle[i][j];
                     puzzle[i][j] = puzzle[i][j+1];
                     puzzle[i][j+1] = temp;
@@ -82,7 +82,7 @@ public class EpuzzleState extends SearchState {
     private EpuzzleState MoveLeft(){
         for(int i = 0; i < puzzle.length; i++){
             for(int j = 0; j < puzzle.length; j++){
-                if(j > 0){
+                if(j > 0 && puzzle[i][j] == 0){
                     int temp =  puzzle[i][j];
                     puzzle[i][j] = puzzle[i][j-1];
                     puzzle[i][j-1] = temp;
@@ -104,19 +104,20 @@ public class EpuzzleState extends SearchState {
 
   public ArrayList<SearchState> getSuccessors(Search searcher) {
     // EpuzzleSearch epuzzleSearch = (EpuzzleSearch) searcher;
-    // int target = epuzzleSearch.getTarget();
+    // int[][] target = epuzzleSearch.getTarget();
 
     ArrayList<EpuzzleState> epuzzleStatesList = new ArrayList<EpuzzleState>(); // the list of jugs states
     ArrayList<SearchState> searchStatesList = new ArrayList<SearchState>();
 
     for (int i = 0; i < puzzle.length; i++) {
-        for(int j = 0; j < puzzle[i].length; j++){
+        for(int j = 0; j < puzzle.length; j++){
             if(puzzle[i][j] == 0){
                 MoveUp();
                 MoveDown();
                 MoveRight();
                 MoveLeft();
                 epuzzleStatesList.add(new EpuzzleState(puzzle));
+
             }
         }
     }
@@ -150,7 +151,9 @@ public class EpuzzleState extends SearchState {
 public String toString(){
     String s = "";
     for (int i = 0; i < puzzle.length; i++) {
-        s += puzzle[i];
+        for(int j = 0; j < puzzle.length; j++){
+        s += puzzle[i][j];
+        }
     }
     return s;
 }
