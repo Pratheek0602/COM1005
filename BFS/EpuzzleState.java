@@ -34,7 +34,7 @@ public class EpuzzleState extends SearchState {
         return Objects.deepEquals(target, puzzle);
     }
 
-    ArrayList<EpuzzleState> epuzzleStatesList = new ArrayList<EpuzzleState>();
+    
 
     // private EpuzzleState MoveUp() {
     //     for (int i = 0; i < puzzle.length; i++) {
@@ -43,14 +43,21 @@ public class EpuzzleState extends SearchState {
     //                 int temp = puzzle[i][j];
     //                 puzzle[i][j] = puzzle[i - 1][j];
     //                 puzzle[i - 1][j] = temp;
-    //                 EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-    //                 epuzzleStatesList.add(epuzzleState);
+    //                 // EpuzzleState epuzzleState = new EpuzzleState(puzzle);
+    //                 // epuzzleStatesList.add(epuzzleState);
+    //                 // return epuzzleState;
+                    
     //             }
     //         }
     //     }
-    //     return null;
+    //     EpuzzleState epuzzleState = new EpuzzleState(puzzle);
+    //     epuzzleStatesList.add(epuzzleState);
+    //     return epuzzleState;
+    //     // return null;
 
     // }
+
+    
 
     private EpuzzleState MoveUp(int x, int y) {
         if (x > 0) {
@@ -58,36 +65,22 @@ public class EpuzzleState extends SearchState {
             puzzle[x][y] = puzzle[x - 1][y];
             puzzle[x - 1][y] = temp;
             EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-            epuzzleStatesList.add(epuzzleState);
+            return epuzzleState;
         }
         return null;
     }
 
-    // private EpuzzleState MoveDown() {
-    //     for (int i = 0; i < puzzle.length; i++) {
-    //         for (int j = 0; j < puzzle.length; j++) {
-    //             if (i < 2 && puzzle[i][j] == 0) {
-    //                 int temp = puzzle[i][j];
-    //                 puzzle[i][j] = puzzle[i + 1][j];
-    //                 puzzle[i + 1][j] = temp;
-    //                 EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-    //                 epuzzleStatesList.add(epuzzleState);
-    //             }
-    //         }
-
-    //     }
-    //     return null;
-
-    // }
     private EpuzzleState MoveDown(int x, int y) {
         if (x < 2) {
             int temp = puzzle[x][y];
             puzzle[x][y] = puzzle[x + 1][y];
             puzzle[x + 1][y] = temp;
             EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-            epuzzleStatesList.add(epuzzleState);
+            return epuzzleState;
+            
         }
         return null;
+    
     }
 
     private EpuzzleState MoveRight(int x, int y) {
@@ -96,7 +89,7 @@ public class EpuzzleState extends SearchState {
             puzzle[x][y] = puzzle[x][y + 1];
             puzzle[x][y + 1] = temp;
             EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-            epuzzleStatesList.add(epuzzleState);
+            return epuzzleState;
 
         }
         return null;
@@ -108,11 +101,34 @@ public class EpuzzleState extends SearchState {
             puzzle[x][y] = puzzle[x][y - 1];
             puzzle[x][y - 1] = temp;
             EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-            epuzzleStatesList.add(epuzzleState);
-
+            return epuzzleState;
         }
         return null;
+        
     }
+
+    // private EpuzzleState MoveRight() {
+    //     for (int i = 0; i < puzzle.length; i++) {
+    //         for (int j = 0; j < puzzle.length; j++) {
+    //             if (j < 2 && puzzle[i][j] == 0) {
+    //                 int temp = puzzle[i][j];
+    //                 puzzle[i][j] = puzzle[i][j + 1];
+    //                 puzzle[i][j + 1] = temp;
+    //                 EpuzzleState epuzzleState = new EpuzzleState(puzzle);
+    //                 epuzzleStatesList.add(epuzzleState);
+    //                 return epuzzleState;
+                    
+    //             }
+    //         }
+
+    //     }
+    //     EpuzzleState epuzzleState = new EpuzzleState(puzzle);
+    //     epuzzleStatesList.add(epuzzleState);
+    //      return epuzzleState;
+        
+    //     // return null;
+
+    // }
 
 
 
@@ -123,12 +139,20 @@ public class EpuzzleState extends SearchState {
     //                 int temp = puzzle[i][j];
     //                 puzzle[i][j] = puzzle[i][j - 1];
     //                 puzzle[i][j - 1] = temp;
-                    
+    //                 // EpuzzleState epuzzleState = new EpuzzleState(puzzle);
+    //                 // epuzzleStatesList.add(epuzzleState);
+    //                 // return epuzzleState;
     //             }
+                
     //         }
 
     //     }
-    //     return null;
+    //     EpuzzleState epuzzleState = new EpuzzleState(puzzle);
+    //             epuzzleStatesList.add(epuzzleState);
+    //             return epuzzleState;
+        
+        
+
     // }
 
 
@@ -146,7 +170,7 @@ public class EpuzzleState extends SearchState {
         // EpuzzleSearch epuzzleSearch = (EpuzzleSearch) searcher;
         // int[][] target = epuzzleSearch.getTarget();
 
-        ArrayList<EpuzzleState> epuzzleStatesList = new ArrayList<EpuzzleState>(); // the list of jugs states
+        ArrayList<EpuzzleState> epuzzleStatesList = new ArrayList<EpuzzleState>(); // the list of epuzzle states
         ArrayList<SearchState> searchStatesList = new ArrayList<SearchState>();
 
         for (int i = 0; i < puzzle.length; i++) {
@@ -154,11 +178,16 @@ public class EpuzzleState extends SearchState {
                 if (puzzle[i][j] == 0) {
                     MoveUp(i,j);
                     MoveDown(i,j);
-                    MoveRight(i, j);
+                    MoveRight(i,j);
                     MoveLeft(i,j);
+                    EpuzzleState epuzzleState = new EpuzzleState(puzzle);
+                    epuzzleStatesList.add(epuzzleState);
+                    
                 }
+                
             }
         }
+
 
         // cast the epuzzle states as search states in searchStatesList
 
