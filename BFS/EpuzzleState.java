@@ -34,129 +34,75 @@ public class EpuzzleState extends SearchState {
         return Objects.deepEquals(target, puzzle);
     }
 
-    
-
-    // private EpuzzleState MoveUp() {
-    //     for (int i = 0; i < puzzle.length; i++) {
-    //         for (int j = 0; j < puzzle.length; j++) {
-    //             if (i > 0 && puzzle[i][j] == 0) {
-    //                 int temp = puzzle[i][j];
-    //                 puzzle[i][j] = puzzle[i - 1][j];
-    //                 puzzle[i - 1][j] = temp;
-    //                 // EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-    //                 // epuzzleStatesList.add(epuzzleState);
-    //                 // return epuzzleState;
-                    
-    //             }
-    //         }
-    //     }
-    //     EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-    //     epuzzleStatesList.add(epuzzleState);
-    //     return epuzzleState;
-    //     // return null;
-
-    // }
-
-    
-
     private EpuzzleState MoveUp(int x, int y) {
-        if (x > 0) {
-            int temp = puzzle[x][y];
-            puzzle[x][y] = puzzle[x - 1][y];
-            puzzle[x - 1][y] = temp;
-            EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-            return epuzzleState;
+        int[][] arr = new int[3][3];
+        for (int i = 0; i < puzzle.length; i++) {
+            for (int j = 0; j < puzzle[i].length; j++) {
+                arr[i][j] = puzzle[i][j];
+            }
         }
-        return null;
+
+        if (x > 0) {
+            int temp = arr[x][y];
+            arr[x][y] = arr[x - 1][y];
+            arr[x - 1][y] = temp;
+        }
+
+
+        EpuzzleState epuzzleState = new EpuzzleState(arr);
+        return epuzzleState;
     }
 
     private EpuzzleState MoveDown(int x, int y) {
-        if (x < 2) {
-            int temp = puzzle[x][y];
-            puzzle[x][y] = puzzle[x + 1][y];
-            puzzle[x + 1][y] = temp;
-            EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-            return epuzzleState;
-            
+        int[][] arr = new int[3][3];
+        for (int i = 0; i < puzzle.length; i++) {
+            for (int j = 0; j < puzzle.length; j++) {
+                arr[i][j] = puzzle[i][j];
+            }
         }
-        return null;
-    
+            if (x < 2) {
+                int temp = arr[x][y];
+                arr[x][y] = arr[x + 1][y];
+                arr[x + 1][y] = temp;
+            }
+
+        
+        EpuzzleState epuzzleState = new EpuzzleState(arr);
+        return epuzzleState;
     }
 
     private EpuzzleState MoveRight(int x, int y) {
-        if (y < 2) {
-            int temp = puzzle[x][y];
-            puzzle[x][y] = puzzle[x][y + 1];
-            puzzle[x][y + 1] = temp;
-            EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-            return epuzzleState;
-
+        int[][] arr = new int[3][3];
+        for (int i = 0; i < puzzle.length; i++) {
+            for (int j = 0; j < puzzle.length; j++) {
+                arr[i][j] = puzzle[i][j];
+            }
         }
-        return null;
+            if (y < 2) {
+                int temp = arr[x][y];
+                arr[x][y] = arr[x][y + 1];
+                arr[x][y + 1] = temp;
+
+            }
+        EpuzzleState epuzzleState = new EpuzzleState(arr);
+        return epuzzleState;
     }
 
     private EpuzzleState MoveLeft(int x, int y) {
-        if (y > 0) {
-            int temp = puzzle[x][y];
-            puzzle[x][y] = puzzle[x][y - 1];
-            puzzle[x][y - 1] = temp;
-            EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-            return epuzzleState;
+        int[][] arr = new int[3][3];
+        for (int i = 0; i < puzzle.length; i++) {
+            for (int j = 0; j < puzzle.length; j++) {
+                arr[i][j] = puzzle[i][j];
+            }
         }
-        return null;
-        
+            if (y > 0) {
+                int temp = arr[x][y];
+                arr[x][y] = arr[x][y - 1];
+                arr[x][y - 1] = temp;
+            }
+        EpuzzleState epuzzleState = new EpuzzleState(arr);
+        return epuzzleState;
     }
-
-    // private EpuzzleState MoveRight() {
-    //     for (int i = 0; i < puzzle.length; i++) {
-    //         for (int j = 0; j < puzzle.length; j++) {
-    //             if (j < 2 && puzzle[i][j] == 0) {
-    //                 int temp = puzzle[i][j];
-    //                 puzzle[i][j] = puzzle[i][j + 1];
-    //                 puzzle[i][j + 1] = temp;
-    //                 EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-    //                 epuzzleStatesList.add(epuzzleState);
-    //                 return epuzzleState;
-                    
-    //             }
-    //         }
-
-    //     }
-    //     EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-    //     epuzzleStatesList.add(epuzzleState);
-    //      return epuzzleState;
-        
-    //     // return null;
-
-    // }
-
-
-
-    // private EpuzzleState MoveLeft() {
-    //     for (int i = 0; i < puzzle.length; i++) {
-    //         for (int j = 0; j < puzzle.length; j++) {
-    //             if (j > 0 && puzzle[i][j] == 0) {
-    //                 int temp = puzzle[i][j];
-    //                 puzzle[i][j] = puzzle[i][j - 1];
-    //                 puzzle[i][j - 1] = temp;
-    //                 // EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-    //                 // epuzzleStatesList.add(epuzzleState);
-    //                 // return epuzzleState;
-    //             }
-                
-    //         }
-
-    //     }
-    //     EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-    //             epuzzleStatesList.add(epuzzleState);
-    //             return epuzzleState;
-        
-        
-
-    // }
-
-
-
 
     /**
      * getSuccessors
@@ -176,18 +122,21 @@ public class EpuzzleState extends SearchState {
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle[i].length; j++) {
                 if (puzzle[i][j] == 0) {
-                    MoveUp(i,j);
-                    MoveDown(i,j);
-                    MoveRight(i,j);
-                    MoveLeft(i,j);
-                    EpuzzleState epuzzleState = new EpuzzleState(puzzle);
-                    epuzzleStatesList.add(epuzzleState);
-                    
+
+                    EpuzzleState moveDown = MoveDown(i, j);
+                    EpuzzleState moveUp = MoveUp(i, j);
+                    EpuzzleState moveRight = MoveRight(i, j);
+                    EpuzzleState moveLeft = MoveLeft(i, j);
+
+                    epuzzleStatesList.add(moveDown);
+                    epuzzleStatesList.add(moveUp);
+                    epuzzleStatesList.add(moveRight);
+                    epuzzleStatesList.add(moveLeft);
                 }
-                
+
+
             }
         }
-
 
         // cast the epuzzle states as search states in searchStatesList
 
@@ -199,15 +148,12 @@ public class EpuzzleState extends SearchState {
     }
 
     /**
-     * sameState - do 2 JugsSearchNodes have the same state?
-     * 
      * @param state second state
      */
 
     public boolean sameState(SearchState state) {
         EpuzzleState epuzzleState = (EpuzzleState) state;
-
-        return (puzzle == epuzzleState.getPuzzle());
+        return Objects.deepEquals(puzzle, epuzzleState.getPuzzle());
     }
 
     /**
@@ -218,7 +164,7 @@ public class EpuzzleState extends SearchState {
         String str = "\n";
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle.length; j++) {
-                str += "| "+ puzzle[i][j] +" |";
+                str += "| " + puzzle[i][j] + " |";
             }
             str += "\n";
         }

@@ -13,9 +13,9 @@ public class RunEpuzzleBFS {
 
         // Define the start initial state 
         int [][] initPuzzle = {
-            {1,0,3},
-            {4,2,6},
-            {7,5,8}
+            {0,1,2},
+            {4,5,3},
+            {7,8,6}
         };
         SearchState initState = (SearchState) new EpuzzleState(initPuzzle);
 
