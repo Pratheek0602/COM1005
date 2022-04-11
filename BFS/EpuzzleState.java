@@ -48,7 +48,6 @@ public class EpuzzleState extends SearchState {
             arr[x - 1][y] = temp;
         }
 
-
         EpuzzleState epuzzleState = new EpuzzleState(arr);
         return epuzzleState;
     }
@@ -60,13 +59,12 @@ public class EpuzzleState extends SearchState {
                 arr[i][j] = puzzle[i][j];
             }
         }
-            if (x < 2) {
-                int temp = arr[x][y];
-                arr[x][y] = arr[x + 1][y];
-                arr[x + 1][y] = temp;
-            }
+        if (x < 2) {
+            int temp = arr[x][y];
+            arr[x][y] = arr[x + 1][y];
+            arr[x + 1][y] = temp;
+        }
 
-        
         EpuzzleState epuzzleState = new EpuzzleState(arr);
         return epuzzleState;
     }
@@ -78,12 +76,12 @@ public class EpuzzleState extends SearchState {
                 arr[i][j] = puzzle[i][j];
             }
         }
-            if (y < 2) {
-                int temp = arr[x][y];
-                arr[x][y] = arr[x][y + 1];
-                arr[x][y + 1] = temp;
+        if (y < 2) {
+            int temp = arr[x][y];
+            arr[x][y] = arr[x][y + 1];
+            arr[x][y + 1] = temp;
 
-            }
+        }
         EpuzzleState epuzzleState = new EpuzzleState(arr);
         return epuzzleState;
     }
@@ -95,11 +93,11 @@ public class EpuzzleState extends SearchState {
                 arr[i][j] = puzzle[i][j];
             }
         }
-            if (y > 0) {
-                int temp = arr[x][y];
-                arr[x][y] = arr[x][y - 1];
-                arr[x][y - 1] = temp;
-            }
+        if (y > 0) {
+            int temp = arr[x][y];
+            arr[x][y] = arr[x][y - 1];
+            arr[x][y - 1] = temp;
+        }
         EpuzzleState epuzzleState = new EpuzzleState(arr);
         return epuzzleState;
     }
@@ -113,8 +111,7 @@ public class EpuzzleState extends SearchState {
      */
 
     public ArrayList<SearchState> getSuccessors(Search searcher) {
-        // EpuzzleSearch epuzzleSearch = (EpuzzleSearch) searcher;
-        // int[][] target = epuzzleSearch.getTarget();
+
 
         ArrayList<EpuzzleState> epuzzleStatesList = new ArrayList<EpuzzleState>(); // the list of epuzzle states
         ArrayList<SearchState> searchStatesList = new ArrayList<SearchState>();
@@ -133,7 +130,6 @@ public class EpuzzleState extends SearchState {
                     epuzzleStatesList.add(moveRight);
                     epuzzleStatesList.add(moveLeft);
                 }
-
 
             }
         }

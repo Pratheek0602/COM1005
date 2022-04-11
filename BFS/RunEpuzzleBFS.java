@@ -13,15 +13,16 @@ public class RunEpuzzleBFS {
 
         // Define the start initial state 
         int [][] initPuzzle = {
-            {0,1,2},
-            {4,5,3},
-            {7,8,6}
+            {2,3,6},
+            {1,5,8},
+            {4,7,0}
         };
         SearchState initState = (SearchState) new EpuzzleState(initPuzzle);
 
 
         // Set off the search engine
         String res = searcher.runSearch(initState, "breadthFirst");
+        // String res = searcher.runSearch(initState, "depthFirst");
 
         // Print out the results
         System.out.println(res);
