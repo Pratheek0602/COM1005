@@ -14,6 +14,8 @@ public class EpuzzleState extends SearchState {
         return puzzle;
     }
 
+
+
     public boolean goalPredicate(Search searcher) {
         EpuzzleSearch epuzzleSearch = (EpuzzleSearch) searcher;
         int[][] target = epuzzleSearch.getTarget(); 
@@ -21,18 +23,41 @@ public class EpuzzleState extends SearchState {
     }
 
 
+    // public int manhattan(){
+    //     int sum = 0;    // number of blocks out of place
+    //     int expected = 0;
+    //     for (int i = 0; i < puzzle.length; i++) {
+    //         for (int j = 0; j < puzzle[i].length; j++) {
+    //             expected++;
+    //             if(puzzle[i][j] != 0 && puzzle[i][j] != expected){ // count for blocks in wrong place
+    //             sum += Math.abs(expected - i)+ Math.abs(expected - j);
+    //             }
+    //         } 
+    //     }
+    //     return sum;
+
+    // }
+
     public int manhattan(){
-        int sum = 0;    // number of blocks out of place
-        int expected = 0;
+        int sum = 0;
         for (int i = 0; i < puzzle.length; i++) {
-            for (int j = 0; j < puzzle[i].length; j++) {
-                expected++;
-                if(puzzle[i][j] != 0 && puzzle[i][j] != expected); // count for blocks in wrong place
-                sum += Math.abs(expected - i)+ Math.abs(expected - j);
-            } 
+            for (int j = 0; j < puzzle.length; j++) {
+                if(puzzle[i][j] != 0){
+                   int targetRow = (puzzle[i][j] - 1) / puzzle.length;
+                   int targetCol = (puzzle[i][j] - 1) % puzzle.length;
+
+                   int expectCod = i - targetRow;
+                   int expectRow = j - targetCol;
+
+                    sum += Math.abs(expectCod) + Math.abs(expectRow);
+                    
+                }
+                
+            }
+            
         }
         return sum;
-
+        
     }
 
     public int hamming(){
@@ -41,8 +66,9 @@ public class EpuzzleState extends SearchState {
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle.length; j++) {
                 expected++;
-                if(puzzle[i][j] != 0 && puzzle[i][j] != expected); // count for blocks in wrong place
-                count++;  
+                if(puzzle[i][j] != 0 && puzzle[i][j] != expected){ // count for blocks in wrong place
+                count++;
+                }  
             } 
         }
         return count;
@@ -64,9 +90,8 @@ public class EpuzzleState extends SearchState {
             count++;
         }
 
-        // EpuzzleState epuzzleState = new EpuzzleState(arr);
-        // return epuzzleState;
-        return manhattan(count);
+        EpuzzleState epuzzleState = new EpuzzleState(arr);
+        return epuzzleState;
     }
 
     private EpuzzleState moveDown(int x, int y) {
@@ -144,8 +169,8 @@ public class EpuzzleState extends SearchState {
             }
         }
 
-        epuzzleStatesList.add(manhattan(count));
-        epuzzleStatesList.add(hamming());
+        // epuzzleStatesList.add(manhattan(count));
+        // epuzzleStatesList.add(hamming());
 
 
 
@@ -174,7 +199,12 @@ public class EpuzzleState extends SearchState {
 
     public String toString() {
         String s = "";
-
+        for (int i = 0; i < puzzle.length; i++) {
+            for (int j = 0; j < puzzle.length; j++) {
+                s += "| " + puzzle[i][j] + " |";
+            }
+            s += "\n";
+        }
         s += "Hamming: "+ hamming()+ " Manhattan: "+ manhattan();
         
         return s;
