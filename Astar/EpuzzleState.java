@@ -21,14 +21,14 @@ public class EpuzzleState extends SearchState {
     }
 
 
-    public int manhattan(int count){
+    public int manhattan(){
         int sum = 0;    // number of blocks out of place
         int expected = 0;
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle[i].length; j++) {
                 expected++;
                 if(puzzle[i][j] != 0 && puzzle[i][j] != expected); // count for blocks in wrong place
-                sum += sum.getestRemCost(puzzle[i][j]);
+                sum += Math.abs(expected - i)+ Math.abs(expected - j);
             } 
         }
         return sum;
@@ -37,9 +37,11 @@ public class EpuzzleState extends SearchState {
 
     public int hamming(){
         int count = 0;    // number of blocks out of place
+        int expected = 0;
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle.length; j++) {
-                if(puzzle[i][j] != 0 && puzzle[i][j] != i + 1); // count for blocks in wrong place
+                expected++;
+                if(puzzle[i][j] != 0 && puzzle[i][j] != expected); // count for blocks in wrong place
                 count++;  
             } 
         }
@@ -80,7 +82,7 @@ public class EpuzzleState extends SearchState {
             arr[x + 1][y] = temp;
         }
 
-        EpuzzleState epuzzleState = new EpuzzleState(arr,localCost,estRemCost);
+        EpuzzleState epuzzleState = new EpuzzleState(arr);
         return epuzzleState;
     }
 
@@ -97,7 +99,7 @@ public class EpuzzleState extends SearchState {
             arr[x][y + 1] = temp;
 
         }
-        EpuzzleState epuzzleState = new EpuzzleState(arr,localCost,estRemCost);
+        EpuzzleState epuzzleState = new EpuzzleState(arr);
         return epuzzleState;
     }
 
@@ -113,7 +115,7 @@ public class EpuzzleState extends SearchState {
             arr[x][y] = arr[x][y - 1];
             arr[x][y - 1] = temp;
         }
-        EpuzzleState epuzzleState = new EpuzzleState(arr,localCost,estRemCost);
+        EpuzzleState epuzzleState = new EpuzzleState(arr);
         return epuzzleState;
     }
 
@@ -171,8 +173,14 @@ public class EpuzzleState extends SearchState {
      */
 
     public String toString() {
+        String s = "";
+
+        s += "Hamming: "+ hamming()+ " Manhattan: "+ manhattan();
         
+        return s;
     }
+        
+    
 
   
     
