@@ -21,13 +21,14 @@ public class EpuzzleState extends SearchState {
     }
 
 
-    public int manhattan(){
+    public int manhattan(int count){
         int sum = 0;    // number of blocks out of place
+        int expected = 0;
         for (int i = 0; i < puzzle.length; i++) {
-            for (int j = 0; j < puzzle.length; j++) {
-                if(puzzle[i][j] != 0 && puzzle[i][j] != i + 1); // count for blocks in wrong place
+            for (int j = 0; j < puzzle[i].length; j++) {
+                expected++;
+                if(puzzle[i][j] != 0 && puzzle[i][j] != expected); // count for blocks in wrong place
                 sum += sum.getestRemCost(puzzle[i][j]);
-                ;  
             } 
         }
         return sum;
@@ -46,12 +47,103 @@ public class EpuzzleState extends SearchState {
 
     }
 
+    private EpuzzleState moveUp(int x, int y) {
+        int[][] arr = new int[3][3];
+        for (int i = 0; i < puzzle.length; i++) {
+            for (int j = 0; j < puzzle[i].length; j++) {
+                arr[i][j] = puzzle[i][j];
+            }
+        }
+        int count = 0;
+        if (x > 0) {
+            int temp = arr[x][y];
+            arr[x][y] = arr[x - 1][y];
+            arr[x - 1][y] = temp;
+            count++;
+        }
+
+        // EpuzzleState epuzzleState = new EpuzzleState(arr);
+        // return epuzzleState;
+        return manhattan(count);
+    }
+
+    private EpuzzleState moveDown(int x, int y) {
+        int[][] arr = new int[3][3];
+        for (int i = 0; i < puzzle.length; i++) {
+            for (int j = 0; j < puzzle.length; j++) {
+                arr[i][j] = puzzle[i][j];
+            }
+        }
+        if (x < 2) {
+            int temp = arr[x][y];
+            arr[x][y] = arr[x + 1][y];
+            arr[x + 1][y] = temp;
+        }
+
+        EpuzzleState epuzzleState = new EpuzzleState(arr,localCost,estRemCost);
+        return epuzzleState;
+    }
+
+    private EpuzzleState moveRight(int x, int y) {
+        int[][] arr = new int[3][3];
+        for (int i = 0; i < puzzle.length; i++) {
+            for (int j = 0; j < puzzle.length; j++) {
+                arr[i][j] = puzzle[i][j];
+            }
+        }
+        if (y < 2) {
+            int temp = arr[x][y];
+            arr[x][y] = arr[x][y + 1];
+            arr[x][y + 1] = temp;
+
+        }
+        EpuzzleState epuzzleState = new EpuzzleState(arr,localCost,estRemCost);
+        return epuzzleState;
+    }
+
+    private EpuzzleState moveLeft(int x, int y) {
+        int[][] arr = new int[3][3];
+        for (int i = 0; i < puzzle.length; i++) {
+            for (int j = 0; j < puzzle.length; j++) {
+                arr[i][j] = puzzle[i][j];
+            }
+        }
+        if (y > 0) {
+            int temp = arr[x][y];
+            arr[x][y] = arr[x][y - 1];
+            arr[x][y - 1] = temp;
+        }
+        EpuzzleState epuzzleState = new EpuzzleState(arr,localCost,estRemCost);
+        return epuzzleState;
+    }
+
 
 
     public ArrayList<SearchState> getSuccessors(Search searcher) {
 
         ArrayList<EpuzzleState> epuzzleStatesList = new ArrayList<EpuzzleState>(); // the list of epuzzle states
         ArrayList<SearchState> searchStatesList = new ArrayList<SearchState>();
+
+        for (int i = 0; i < puzzle.length; i++) {
+            for (int j = 0; j < puzzle[i].length; j++) {
+                if (puzzle[i][j] == 0) {
+
+                    EpuzzleState moveDown = moveDown(i, j);
+                    EpuzzleState moveUp = moveUp(i, j);
+                    EpuzzleState moveRight = moveRight(i, j);
+                    EpuzzleState moveLeft = moveLeft(i, j);
+
+                    epuzzleStatesList.add(moveDown);
+                    epuzzleStatesList.add(moveUp);
+                    epuzzleStatesList.add(moveRight);
+                    epuzzleStatesList.add(moveLeft);
+                }
+
+            }
+        }
+
+        epuzzleStatesList.add(manhattan(count));
+        epuzzleStatesList.add(hamming());
 
 
 

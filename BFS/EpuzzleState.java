@@ -34,7 +34,17 @@ public class EpuzzleState extends SearchState {
         return Objects.deepEquals(target, puzzle);
     }
 
-    private EpuzzleState MoveUp(int x, int y) {
+    // private int [][] copyPuzzle(){
+    //     int[][] arr = new int[3][3];
+    //     for (int i = 0; i < puzzle.length; i++) {
+    //         for (int j = 0; j < puzzle[i].length; j++) {
+    //             arr[i][j] = puzzle[i][j];
+    //         }
+    //     }
+
+    // }
+
+    private EpuzzleState moveUp(int x, int y) {
         int[][] arr = new int[3][3];
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle[i].length; j++) {
@@ -52,7 +62,7 @@ public class EpuzzleState extends SearchState {
         return epuzzleState;
     }
 
-    private EpuzzleState MoveDown(int x, int y) {
+    private EpuzzleState moveDown(int x, int y) {
         int[][] arr = new int[3][3];
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle.length; j++) {
@@ -69,7 +79,7 @@ public class EpuzzleState extends SearchState {
         return epuzzleState;
     }
 
-    private EpuzzleState MoveRight(int x, int y) {
+    private EpuzzleState moveRight(int x, int y) {
         int[][] arr = new int[3][3];
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle.length; j++) {
@@ -86,7 +96,7 @@ public class EpuzzleState extends SearchState {
         return epuzzleState;
     }
 
-    private EpuzzleState MoveLeft(int x, int y) {
+    private EpuzzleState moveLeft(int x, int y) {
         int[][] arr = new int[3][3];
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle.length; j++) {
@@ -120,10 +130,10 @@ public class EpuzzleState extends SearchState {
             for (int j = 0; j < puzzle[i].length; j++) {
                 if (puzzle[i][j] == 0) {
 
-                    EpuzzleState moveDown = MoveDown(i, j);
-                    EpuzzleState moveUp = MoveUp(i, j);
-                    EpuzzleState moveRight = MoveRight(i, j);
-                    EpuzzleState moveLeft = MoveLeft(i, j);
+                    EpuzzleState moveDown = moveDown(i, j);
+                    EpuzzleState moveUp = moveUp(i, j);
+                    EpuzzleState moveRight = moveRight(i, j);
+                    EpuzzleState moveLeft = moveLeft(i, j);
 
                     epuzzleStatesList.add(moveDown);
                     epuzzleStatesList.add(moveUp);

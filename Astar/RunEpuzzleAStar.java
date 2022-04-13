@@ -17,7 +17,7 @@ public class RunEpuzzleAStar {
         EpuzzleSearch searcher = new EpuzzleSearch (tarPuzzle);
         SearchState initState = (SearchState) new EpuzzleState(gen.puzzGen(d),0,0);
 
-        String res_astar = searcher.runSearch(initState, "AStar");
+        String res_astar = searcher.runSearch(initState, "Astar");
         System.out.println(res_astar);
 
     }
