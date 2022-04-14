@@ -7,7 +7,7 @@ public class EpuzzleState extends SearchState {
     public EpuzzleState(int[][] puzzle, int lc, int rc) {
         this.puzzle = puzzle;
         localCost = lc;
-        estRemCost = rc + hamming();
+        estRemCost = rc;
     }
 
     public int[][] getPuzzle() {
@@ -20,14 +20,14 @@ public class EpuzzleState extends SearchState {
         return Objects.deepEquals(target, puzzle);
     }
 
-    private int manhattan() {
+    private static int manhattan(int[][] state) {
         int sum = 0;
-        for (int i = 0; i < puzzle.length; i++) {
-            for (int j = 0; j < puzzle.length; j++) {
-                if (puzzle[i][j] != 0) {
+        for (int i = 0; i < state.length; i++) {
+            for (int j = 0; j < state.length; j++) {
+                if (state[i][j] != 0) {
 
-                    int targetRow = (puzzle[i][j] - 1) / puzzle.length; // expected row coordinate
-                    int targetCol = (puzzle[i][j] - 1) % puzzle.length; // expected col coordinate
+                    int targetRow = (state[i][j] - 1) / state.length; // expected row coordinate
+                    int targetCol = (state[i][j] - 1) % state.length; // expected col coordinate
 
                     int distExpectRow = i - targetRow; // distance to expected row coordinate
                     int distExpectCol = j - targetCol; // distance to expected col coordinate
@@ -43,19 +43,30 @@ public class EpuzzleState extends SearchState {
 
     }
 
-    private int hamming() {
+    private static int hamming(int[][] state) {
         int count = 0; // number of blocks out of place
         int expected = 0;
-        for (int i = 0; i < puzzle.length; i++) {
-            for (int j = 0; j < puzzle.length; j++) {
+        for (int i = 0; i < state.length; i++) {
+            for (int j = 0; j < state[i].length; j++) {
                 expected++;
-                if (puzzle[i][j] != 0 && puzzle[i][j] != expected) { // count for blocks in wrong place
+                if (state[i][j] != 0 && state[i][j] != expected) { // count for blocks in wrong place
                     count++;
                 }
             }
         }
         return count;
 
+    }
+
+    public static int estRemCost(String strat, int[][] puzzle) {
+        int cost = 0;
+        if (strat == "hamming") {
+            cost = hamming(puzzle);
+        } 
+        if(strat == "manhattan"){
+            cost = manhattan(puzzle);
+        }
+        return cost;
     }
 
     private EpuzzleState moveUp(int x, int y) {
@@ -71,7 +82,7 @@ public class EpuzzleState extends SearchState {
             arr[x - 1][y] = temp;
         }
 
-        EpuzzleState epuzzleState = new EpuzzleState(arr,localCost,estRemCost);
+        EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("hamming", arr));
         return epuzzleState;
     }
 
@@ -88,7 +99,8 @@ public class EpuzzleState extends SearchState {
             arr[x + 1][y] = temp;
         }
 
-        EpuzzleState epuzzleState = new EpuzzleState(arr,localCost,estRemCost);
+        // EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("hamming", arr));
+        EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("manhattan", arr));
         return epuzzleState;
     }
 
@@ -105,7 +117,8 @@ public class EpuzzleState extends SearchState {
             arr[x][y + 1] = temp;
 
         }
-        EpuzzleState epuzzleState = new EpuzzleState(arr,localCost,estRemCost);
+        // EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("hamming", arr));
+        EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("manhattan", arr));
         return epuzzleState;
     }
 
@@ -121,7 +134,8 @@ public class EpuzzleState extends SearchState {
             arr[x][y] = arr[x][y - 1];
             arr[x][y - 1] = temp;
         }
-        EpuzzleState epuzzleState = new EpuzzleState(arr,localCost,estRemCost);
+        // EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("hamming", arr));
+        EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("manhattan", arr));
         return epuzzleState;
     }
 
@@ -139,19 +153,15 @@ public class EpuzzleState extends SearchState {
                     EpuzzleState moveRight = moveRight(i, j);
                     EpuzzleState moveLeft = moveLeft(i, j);
 
-                    System.out.println("Hamming: "+hamming());
                     epuzzleStatesList.add(moveDown);
                     epuzzleStatesList.add(moveUp);
                     epuzzleStatesList.add(moveRight);
                     epuzzleStatesList.add(moveLeft);
 
-
-                    
                 }
 
             }
         }
-        
 
         for (EpuzzleState es : epuzzleStatesList) {
             searchStatesList.add((SearchState) es);
