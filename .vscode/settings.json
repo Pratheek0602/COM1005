@@ -1,6 +1,10 @@
-// {
+{
+    "java.project.sourcePaths": [
+        "Astar"
+    ]
+} // {
 //     "java.project.sourcePaths": [
-//         "BFS",
-//         "Astar"
+//         "Astar",
+//         "BFS"
 //     ]
-// }
+// } 
