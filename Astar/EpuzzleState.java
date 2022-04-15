@@ -60,47 +60,68 @@ public class EpuzzleState extends SearchState {
 
     public static int estRemCost(String strat, int[][] puzzle) {
         int cost = 0;
-        if (strat == "hamming") {
+        if (strat.equals("hamming")) {
             cost = hamming(puzzle);
         } 
-        if(strat == "manhattan"){
+        if(strat.equals("manhattan")){
             cost = manhattan(puzzle);
         }
         return cost;
     }
 
+    // public static int calculateEstRemCost(int[][] puzzle) {
+
+    //     int costHamming = 0;
+    //     int costManhattan = 0;
+        
+    //     costHamming = hamming(puzzle);
+    //     costManhattan = hamming(puzzle);
+
+    //     return costHamming;
+
+    //     }
+        
+    
+
+    
+
     private EpuzzleState moveUp(int x, int y) {
         int[][] arr = new int[3][3];
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle[i].length; j++) {
-                arr[i][j] = puzzle[i][j];
+                arr[i][j] = puzzle[i][j]; // duplicate the puzzle
             }
         }
+        //swapping the puzzle
         if (x > 0) {
             int temp = arr[x][y];
             arr[x][y] = arr[x - 1][y];
             arr[x - 1][y] = temp;
         }
 
+        // EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("manhattan", arr));
         EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("hamming", arr));
+        // EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.calculateEstRemCost(arr));
         return epuzzleState;
     }
 
     private EpuzzleState moveDown(int x, int y) {
         int[][] arr = new int[3][3];
-        for (int i = 0; i < puzzle.length; i++) {
+        for (int i = 0; i < puzzle.length; i++) { 
             for (int j = 0; j < puzzle.length; j++) {
-                arr[i][j] = puzzle[i][j];
+                arr[i][j] = puzzle[i][j]; // duplicate the puzzle
             }
         }
+        //swapping the puzzle
         if (x < 2) {
             int temp = arr[x][y];
             arr[x][y] = arr[x + 1][y];
             arr[x + 1][y] = temp;
         }
 
-        // EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("hamming", arr));
-        EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("manhattan", arr));
+        EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("hamming", arr));
+        // EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("manhattan", arr));
+        // EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.calculateEstRemCost(arr));
         return epuzzleState;
     }
 
@@ -108,17 +129,19 @@ public class EpuzzleState extends SearchState {
         int[][] arr = new int[3][3];
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle.length; j++) {
-                arr[i][j] = puzzle[i][j];
+                arr[i][j] = puzzle[i][j]; // duplicate the puzzle
             }
         }
+        //swapping the puzzle
         if (y < 2) {
             int temp = arr[x][y];
             arr[x][y] = arr[x][y + 1];
             arr[x][y + 1] = temp;
 
         }
-        // EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("hamming", arr));
-        EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("manhattan", arr));
+        EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("hamming", arr));
+        // EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("manhattan", arr));
+        // EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.calculateEstRemCost(arr));
         return epuzzleState;
     }
 
@@ -126,16 +149,18 @@ public class EpuzzleState extends SearchState {
         int[][] arr = new int[3][3];
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle.length; j++) {
-                arr[i][j] = puzzle[i][j];
+                arr[i][j] = puzzle[i][j]; // duplicate the puzzle
             }
         }
+        //swapping the puzzle
         if (y > 0) {
             int temp = arr[x][y];
             arr[x][y] = arr[x][y - 1];
             arr[x][y - 1] = temp;
         }
-        // EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("hamming", arr));
-        EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("manhattan", arr));
+        EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("hamming", arr));
+        // EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.estRemCost("manhattan", arr));
+        // EpuzzleState epuzzleState = new EpuzzleState(arr, 1, EpuzzleState.calculateEstRemCost(arr));
         return epuzzleState;
     }
 
@@ -148,15 +173,10 @@ public class EpuzzleState extends SearchState {
             for (int j = 0; j < puzzle[i].length; j++) {
                 if (puzzle[i][j] == 0) {
 
-                    EpuzzleState moveDown = moveDown(i, j);
-                    EpuzzleState moveUp = moveUp(i, j);
-                    EpuzzleState moveRight = moveRight(i, j);
-                    EpuzzleState moveLeft = moveLeft(i, j);
-
-                    epuzzleStatesList.add(moveDown);
-                    epuzzleStatesList.add(moveUp);
-                    epuzzleStatesList.add(moveRight);
-                    epuzzleStatesList.add(moveLeft);
+                    epuzzleStatesList.add(moveDown(i, j));
+                    epuzzleStatesList.add(moveUp(i, j));
+                    epuzzleStatesList.add(moveRight(i, j));
+                    epuzzleStatesList.add(moveLeft(i, j));
 
                 }
 

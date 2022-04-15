@@ -31,8 +31,8 @@ public class RunEpuzzleAStar {
         
         EpuzzleSearch searcher = new EpuzzleSearch (tarPuzzle);
         // SearchState initState = (SearchState) new EpuzzleState(gen.puzzGen(d),1,0);
-        SearchState initState = (SearchState) new EpuzzleState(P3,1,EpuzzleState.estRemCost("manhattan", P3));
-        // SearchState initState = (SearchState) new EpuzzleState(P1,1,estRemCost("manhattan",P1,tarPuzzle));
+        SearchState initState = (SearchState) new EpuzzleState(P1,1,EpuzzleState.estRemCost("hamming", P1));
+        // SearchState initState = (SearchState) new EpuzzleState(P1,1,EpuzzleState.estRemCost("manhattan",P1));
 
 
         String res_astar = searcher.runSearch(initState, "Astar");
