@@ -1,5 +1,7 @@
 import java.util.*;
 public class RunEpuzzleAStar {
+
+
     public static void main(String[] arg) {
 
         int seed = 23456;
@@ -28,15 +30,22 @@ public class RunEpuzzleAStar {
             {1,5,8},
             {4,7,0}
         };
+
+
+    
         
         EpuzzleSearch searcher = new EpuzzleSearch (tarPuzzle);
-        // SearchState initState = (SearchState) new EpuzzleState(gen.puzzGen(d),1,0);
-        SearchState initState = (SearchState) new EpuzzleState(P1,1,EpuzzleState.estRemCost("hamming", P1));
-        // SearchState initState = (SearchState) new EpuzzleState(P1,1,EpuzzleState.estRemCost("manhattan",P1));
+
+        SearchState initState = (SearchState) new EpuzzleState(P3, "hamming", 1, 0);
+        // SearchState initState = (SearchState) new EpuzzleState(P3, "manhattan", 1, 0);
+        // SearchState initState = (SearchState) new EpuzzleState(gen.puzzGen(d),"hamming",1,0);
+
 
 
         String res_astar = searcher.runSearch(initState, "Astar");
         System.out.println(res_astar);
+
+
 
     }
     
