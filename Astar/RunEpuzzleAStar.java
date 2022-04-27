@@ -1,14 +1,18 @@
 import java.util.*;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 public class RunEpuzzleAStar {
 
     public static void main(String[] arg) {
 
-        int seed = 23456;
-        EpuzzGen gen = new EpuzzGen(seed);
+        // int seed = 23456;
+   
+        
+        // EpuzzGen gen = new EpuzzGen(seed);
 
         // generate puzzle providing difficulty
-        int d = 6;
+        // int d = 6;
 
         int[][] tarPuzzle = {
                 { 1, 2, 3 },
@@ -31,14 +35,31 @@ public class RunEpuzzleAStar {
                 { 4, 7, 0 }
         };
 
+
         EpuzzleSearch searcher = new EpuzzleSearch(tarPuzzle);
 
-        SearchState initState = (SearchState) new EpuzzleState(P3, "hamming", 1, 0);
-        // SearchState initState = (SearchState) new EpuzzleState(P3, "manhattan", 1,0);
+        for (int d = 6; d <= 12; d++) {
+                double runtime = 0;
+                for (int j = 0; j <= 6; j++) {
+                        int seed = j*10+123;
+                        EpuzzGen gen = new EpuzzGen(seed);
+                        SearchState initState = (SearchState) new EpuzzleState(gen.puzzGen(d),"hamming",1,0);
+                        float res = searcher.runSearchE(initState, "Astar");
+                        runtime += res;
+                }
+                System.out.println("The average efficiency for difficulty "+ d + " is: "+ runtime/3 + "\n");
+        }
+        
+
+        // SearchState initState = (SearchState) new EpuzzleState(P3, "manhattan", 1, 0);
+        // SearchState initState = (SearchState) new EpuzzleState(P1, "hamming", 1,0);
         // SearchState initState = (SearchState) new EpuzzleState(gen.puzzGen(d),"hamming",1,0);
 
-        String res_astar = searcher.runSearch(initState, "Astar");
-        System.out.println(res_astar);
+        // String res_astar = searcher.runSearch(initState, "Astar");
+        // String res_astar = searcher.runSearch(initState, "Astar");
+        // float res_astar = searcher.runSearchE(initState, "breadthFirst");
+
+        // System.out.println(res_astar); 
 
     }
 

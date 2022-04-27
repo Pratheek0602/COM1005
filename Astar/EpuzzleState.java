@@ -151,7 +151,7 @@ public class EpuzzleState extends SearchState {
 
     public ArrayList<SearchState> getSuccessors(Search searcher) {
 
-        ArrayList<EpuzzleState> epuzzleStatesList = new ArrayList<EpuzzleState>(); // the list of epuzzle states
+        ArrayList<EpuzzleState> epuzzleStatesList = new ArrayList<EpuzzleState>();
         ArrayList<SearchState> searchStatesList = new ArrayList<SearchState>();
 
         for (int i = 0; i < puzzle.length; i++) {
