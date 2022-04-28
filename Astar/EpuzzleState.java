@@ -149,6 +149,7 @@ public class EpuzzleState extends SearchState {
         return epuzzleState;
     }
 
+    //Find empty space and add all move functions to the list 
     public ArrayList<SearchState> getSuccessors(Search searcher) {
 
         ArrayList<EpuzzleState> epuzzleStatesList = new ArrayList<EpuzzleState>();
@@ -167,7 +168,7 @@ public class EpuzzleState extends SearchState {
 
             }
         }
-
+        // cast the epuzzle states as search states in searchStatesList
         for (EpuzzleState es : epuzzleStatesList) {
             searchStatesList.add((SearchState) es);
         }

@@ -38,16 +38,19 @@ public class RunEpuzzleAStar {
 
         EpuzzleSearch searcher = new EpuzzleSearch(tarPuzzle);
 
+        //generates tree seeds and take average of run time
         for (int d = 6; d <= 12; d++) {
                 double runtime = 0;
-                for (int j = 0; j <= 6; j++) {
-                        int seed = j*10+123;
+                for (int j = 0; j <= 3; j++) {
+                        int seed = j*10+121;
                         EpuzzGen gen = new EpuzzGen(seed);
-                        SearchState initState = (SearchState) new EpuzzleState(gen.puzzGen(d),"hamming",1,0);
-                        float res = searcher.runSearchE(initState, "Astar");
+                        SearchState initState = (SearchState) new EpuzzleState(gen.puzzGen(d),"manhattan",1,0);
+                        float res = searcher.runSearchE(initState, "breadthFirst");
                         runtime += res;
+                        
                 }
-                System.out.println("The average efficiency for difficulty "+ d + " is: "+ runtime/3 + "\n");
+                double averageRuntime = runtime/3;
+                System.out.println("The average efficiency for difficulty "+ d + " is: "+ averageRuntime + "\n");
         }
         
 

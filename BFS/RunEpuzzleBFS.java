@@ -28,13 +28,10 @@ public class RunEpuzzleBFS {
             {1,5,8},
             {4,7,0}
         };
-        // SearchState initState = (SearchState) new EpuzzleState(P3);
-
-
+        SearchState initState = (SearchState) new EpuzzleState(P1);
 
         // Set off the search engine
         String res = searcher.runSearch(initState, "breadthFirst");
-
 
         // Print out the results
         System.out.println(res);

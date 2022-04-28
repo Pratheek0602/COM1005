@@ -34,24 +34,15 @@ public class EpuzzleState extends SearchState {
         return Objects.deepEquals(target, puzzle);
     }
 
-    // private int [][] copyPuzzle(){
-    //     int[][] arr = new int[3][3];
-    //     for (int i = 0; i < puzzle.length; i++) {
-    //         for (int j = 0; j < puzzle[i].length; j++) {
-    //             arr[i][j] = puzzle[i][j];
-    //         }
-    //     }
-
-    // }
-
     private EpuzzleState moveUp(int x, int y) {
+        // duplicate the puzzles
         int[][] arr = new int[3][3];
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle[i].length; j++) {
                 arr[i][j] = puzzle[i][j];
             }
         }
-
+        // swapping the puzzles in up direction
         if (x > 0) {
             int temp = arr[x][y];
             arr[x][y] = arr[x - 1][y];
@@ -63,12 +54,14 @@ public class EpuzzleState extends SearchState {
     }
 
     private EpuzzleState moveDown(int x, int y) {
+        // duplicate the puzzles
         int[][] arr = new int[3][3];
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle.length; j++) {
                 arr[i][j] = puzzle[i][j];
             }
         }
+        // swapping the puzzles in down direction
         if (x < 2) {
             int temp = arr[x][y];
             arr[x][y] = arr[x + 1][y];
@@ -80,12 +73,14 @@ public class EpuzzleState extends SearchState {
     }
 
     private EpuzzleState moveRight(int x, int y) {
+        // duplicate the puzzles
         int[][] arr = new int[3][3];
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle.length; j++) {
                 arr[i][j] = puzzle[i][j];
             }
         }
+        // swapping the puzzles in right direction
         if (y < 2) {
             int temp = arr[x][y];
             arr[x][y] = arr[x][y + 1];
@@ -97,12 +92,14 @@ public class EpuzzleState extends SearchState {
     }
 
     private EpuzzleState moveLeft(int x, int y) {
+        // duplicate the puzzles
         int[][] arr = new int[3][3];
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle.length; j++) {
                 arr[i][j] = puzzle[i][j];
             }
         }
+        // swapping the puzzles in left direction
         if (y > 0) {
             int temp = arr[x][y];
             arr[x][y] = arr[x][y - 1];
@@ -120,10 +117,11 @@ public class EpuzzleState extends SearchState {
      *                 method will return list of possible successors
      */
 
+    
+     //Find empty space and add all move functions to the list 
     public ArrayList<SearchState> getSuccessors(Search searcher) {
 
-
-        ArrayList<EpuzzleState> epuzzleStatesList = new ArrayList<EpuzzleState>(); // the list of epuzzle states
+        ArrayList<EpuzzleState> epuzzleStatesList = new ArrayList<EpuzzleState>(); 
         ArrayList<SearchState> searchStatesList = new ArrayList<SearchState>();
 
         for (int i = 0; i < puzzle.length; i++) {
