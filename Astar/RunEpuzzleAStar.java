@@ -7,7 +7,7 @@ public class RunEpuzzleAStar {
         public static void main(String[] arg) {
 
                 // generate puzzle providing difficulty
-                int d = 8;
+                int d = 6;
 
                 // Goal state (target)
                 int[][] tarPuzzle = {
