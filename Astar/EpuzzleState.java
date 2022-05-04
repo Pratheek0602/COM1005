@@ -1,3 +1,8 @@
+/* Assignment The 8-puzzle and A*: Implementing A*
+* Written by: Pratheek Vasu
+* Written on: 4/5/2022
+*/
+
 import java.util.*;
 
 public class EpuzzleState extends SearchState {
@@ -46,8 +51,8 @@ public class EpuzzleState extends SearchState {
     }
 
     private static int hamming(int[][] state) {
-        int count = 0; 
-        int expected = 0; //expected value in the puzzle configuration
+        int count = 0;
+        int expected = 0; // expected value in the puzzle configuration
         for (int i = 0; i < state.length; i++) {
             for (int j = 0; j < state[i].length; j++) {
                 expected++;
@@ -59,6 +64,7 @@ public class EpuzzleState extends SearchState {
         return count;
 
     }
+
     // Depending on strategy it calculates estimated remaining cost of state
     private int estRemCost(int[][] state) {
         int cost = 0;
@@ -77,7 +83,7 @@ public class EpuzzleState extends SearchState {
         // duplicate the puzzles
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle[i].length; j++) {
-                arr[i][j] = puzzle[i][j]; 
+                arr[i][j] = puzzle[i][j];
             }
         }
         // swapping the puzzles in up direction
@@ -96,7 +102,7 @@ public class EpuzzleState extends SearchState {
         // duplicate the puzzle
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle.length; j++) {
-                arr[i][j] = puzzle[i][j]; 
+                arr[i][j] = puzzle[i][j];
             }
         }
         // swapping the puzzle in down direction
@@ -116,7 +122,7 @@ public class EpuzzleState extends SearchState {
         // duplicate the puzzle
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle.length; j++) {
-                arr[i][j] = puzzle[i][j]; 
+                arr[i][j] = puzzle[i][j];
             }
         }
         // swapping the puzzle in right direction
@@ -136,7 +142,7 @@ public class EpuzzleState extends SearchState {
         // duplicate the puzzle
         for (int i = 0; i < puzzle.length; i++) {
             for (int j = 0; j < puzzle.length; j++) {
-                arr[i][j] = puzzle[i][j]; 
+                arr[i][j] = puzzle[i][j];
             }
         }
         // swapping the puzzles in left direction
@@ -149,7 +155,7 @@ public class EpuzzleState extends SearchState {
         return epuzzleState;
     }
 
-    //Find empty space and add all move functions to the list 
+    // Find empty space and add all move functions to the list
     public ArrayList<SearchState> getSuccessors(Search searcher) {
 
         ArrayList<EpuzzleState> epuzzleStatesList = new ArrayList<EpuzzleState>();
@@ -179,22 +185,6 @@ public class EpuzzleState extends SearchState {
     public boolean sameState(SearchState state) {
         EpuzzleState epuzzleState = (EpuzzleState) state;
         return Objects.deepEquals(puzzle, epuzzleState.getPuzzle());
-    }
-
-    /**
-     * toString
-     */
-
-    public String toString() {
-        String s = "\n";
-        for (int i = 0; i < puzzle.length; i++) {
-            for (int j = 0; j < puzzle.length; j++) {
-                s += "| " + puzzle[i][j] + " |";
-            }
-            s += "\n";
-        }
-
-        return s;
     }
 
 }

@@ -1,4 +1,7 @@
-
+/* Assignment The 8-puzzle and A*: Implementing BFS
+* Written by: Pratheek Vasu
+* Written on: 4/5/2022
+*/
 import java.util.*;
 
 public class EpuzzleState extends SearchState {
