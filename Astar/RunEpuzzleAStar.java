@@ -1,7 +1,5 @@
 import java.util.*;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 public class RunEpuzzleAStar {
 
         public static void main(String[] arg) {
